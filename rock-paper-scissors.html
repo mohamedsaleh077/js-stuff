@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>java script game</title>
+  <style>
+    p {
+      color: white;
+    }
+
+    body {
+      background-color: rgb(40, 40, 40);
+      display: flex;
+      /* justify-content: center; */
+      align-items: center;
+      margin: 0;
+      height: 100vh;
+    }
+
+    div {
+      margin: 0 auto;
+      overflow: auto;
+    }
+
+    button {
+      font-size: 40px;
+      border-radius: 100%;
+      background-color: white;
+      padding: 15px;
+      width: 90px;
+      border: solid 1px rgb(255, 0, 0);
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: rgb(234, 234, 234);
+      border: solid 2px rgb(255, 0, 0);
+    }
+
+    button:active {
+      background-color: rgb(212, 202, 202);
+      border: solid 3px rgb(187, 0, 0);
+    }
+
+    span {
+      font-size: 50px;
+    }
+
+    .resulte {
+      height: 0px;
+      transition: height 0.15s;
+    }
+
+    .normal-button {
+      font-size: 16px;
+      border-radius: 15px;
+      padding: 3px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <p>Rock Paper Scissors Game VS PC</p>
+    <button onclick="user_play(0);">✊</button>
+    <button onclick="user_play(1);">✋</button>
+    <button onclick="user_play(2);">✌️</button>
+    <div class="resulte">
+      <p>Resulte</p>
+      <p>User <span id="user_resulte"></span> <span id="pc_resulte"></span> PC</p>
+      <p id="winner"></p>
+      <p style="display: inline-block;">you win for <span id="wins"></span> times ans lose for <span id="loses"></span> times</p>
+      <button class="normal-button" onclick="reset()">RESET</button>
+    </div>
+  </div>
+
+  <script>
+    const rock = '✊';
+    const paper = '✋';
+    const scissors = '✌️';
+
+    var win_count = 0;
+    var lose_count = 0;
+
+    function reset(){
+      win_count = 0;
+      lose_count = 0;
+      display_counter_result();
+    }
+
+    function display_player_resulte(user, pc) {
+      document.getElementById('user_resulte').innerHTML = TurnNumberIntoIcon(user);
+      document.getElementById('pc_resulte').innerHTML = TurnNumberIntoIcon(pc);
+    }
+    function display_counter_result(){
+      document.getElementById('wins').innerHTML = win_count;
+      document.getElementById('loses').innerHTML = lose_count;
+    }
+
+    function TurnNumberIntoIcon(num) {
+      switch (num) {
+        case 0:
+          return rock;
+          break;
+        case 1:
+          return paper;
+          break
+        case 2:
+          return scissors;
+          break;
+      }
+    }
+
+    function display_winner(win) {
+      if (win === 'draw') {
+        document.getElementById('winner').innerHTML = 'DRAW! NO WINNER!';
+      } else {
+        document.getElementById('winner').innerHTML = win + ' is winner';
+      }
+    }
+
+    function pc_play() {
+      return Math.floor(Math.random() * 3);
+    }
+
+    function resulte(pc, user) {
+      console.log('user: ' + user);
+      console.log('pc:   ' + pc);
+      if (pc === user) {
+        return 'draw';
+
+      } else if (user === 0 && pc === 1) {
+        lose_count++;
+        return 'PC';
+      } else if (user === 0 && pc === 2) {
+        win_count++;
+        return 'User';
+
+      } else if (user === 1 && pc === 0) {
+        win_count++;
+        return 'user';
+      } else if (user === 1 && pc === 2) {
+        lose_count++;
+        return 'PC';
+
+      } else if (user === 2 && pc == 0) {
+        lose_count++;
+        return 'PC';
+      } else if (user === 2 && pc === 1) {
+        win_count++;
+        return 'User';
+      }
+    }
+
+    function user_play(user_input) {
+      var pc_turn = pc_play();
+      winner = resulte(pc_turn, user_input);
+      display_winner(winner);
+      display_player_resulte(user_input, pc_turn);
+      display_counter_result();
+      document.getElementsByClassName('resulte')[0].style.height = '300px';
+    }
+  </script>
+</body>
+
+</html>
