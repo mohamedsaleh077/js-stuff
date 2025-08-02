@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>morse conventor</title>
+
+  <style>
+    p {
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 19px;
+      margin: 5px;
+      font-size: 15px;
+    }
+
+    body {
+      background-color: rgb(40, 40, 40);
+      display: flex;
+      /* justify-content: center; */
+      align-items: center;
+      margin: 0;
+      height: 100vh;
+    }
+
+    div {
+      margin: 0 auto;
+      /* overflow: auto; */
+      width: 80%;
+    }
+
+    textarea {
+      display: block;
+      font-size: 18px;
+      border-radius: 5px;
+      background-color: white;
+      padding: 15px;
+      width: 70%;
+      border: solid 1px rgb(200, 200, 200);
+      margin: 5px;
+      background-color: rgb(80, 80, 80);
+      cursor: pointer;
+      color: white
+    }
+
+    textarea:hover {
+      background-color: rgb(90, 90, 90);
+      border: solid 2px rgb(200, 200, 200);
+    }
+
+    textarea:active {
+      background-color: rgb(100, 100, 100);
+      border: solid 3px rgb(255, 255, 255);
+    }
+
+    span {
+      font-size: 50px;
+    }
+
+    .resulte {
+      height: 0px;
+      transition: height 0.15s;
+    }
+
+    .normal-button {
+      font-size: 16px;
+      border-radius: 15px;
+      padding: 3px;
+      display: inline-block;
+    }
+
+    button {
+      padding: 7px;
+      margin: 5px;
+      background-color: rgb(100, 100, 100);
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: rgb(90, 90, 90);
+    }
+
+    button:active {
+      background-color: rgb(80, 80, 80);
+    }
+
+    #logs {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 15px;
+    }
+
+    .title{
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 900;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div>
+    <p class="title">Morse Tranlator</p>
+
+    <p>text in English</p>
+    <textarea type="text" placeholder="English going here" id="english_input" rows="4"></textarea>
+    <button onclick="copyToClipboard('english_input')">Copy English text</button>
+
+
+    <p>text in Morse</p>
+    <textarea type="text" disabled placeholder="Morse going here" id="morse_input" rows="4"></textarea>
+    <button onclick="copyToClipboard('morse_input')">Copy Morse Code</button>
+
+    <button onclick="reset()">RESET</button>
+
+    <p id="logs"></p>
+  </div>
+
+  <script>
+    const alpha_array = [
+      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+      'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4',
+      '5', '6', '7', '8', '9', '0', ' '
+    ];
+
+    const morse_array = [
+      '.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-',
+      '.-..', '--', '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-',
+      '.--', '-..-', '-.--', '--..', '.---', '..---', '...--', '....-', '.....',
+      '-....', '--...', '---..', '----.', '-----', ' '
+    ];
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+
+    document.getElementById('english_input').addEventListener('keyup', keyup);
+
+    function keyup(e) {
+      let user_input_into_morse = '';
+      let morse, user_input;
+
+      user_input = e.target.value;
+
+
+      for (let i = 0; i < user_input.length; i++) {
+        let alpha = user_input[i].toLowerCase();
+        let alpha_index = alpha_array.indexOf(alpha);
+        if (alpha_index === -1) {
+          morse = alpha;
+        } else {
+          morse = morse_array[alpha_index] + ' ';
+        }
+        console.log(alpha, morse);
+        user_input_into_morse += morse;
+
+      }
+      console.log(user_input_into_morse);
+      document.getElementById('morse_input').value = user_input_into_morse;
+    }
+
+    function copyToClipboard(the_id) {
+      let textBox = document.getElementById(the_id);
+      textBox.select();
+      document.execCommand("copy");
+      document.getElementById('logs').textContent = 'copied to clipboard';
+      setTimeout(() => {
+        console.log("Delayed for 3 second.");
+        document.getElementById('logs').textContent = '';
+
+      }, 1000);
+    }
+
+    function reset() {
+      document.getElementById('morse_input').value = '';
+      document.getElementById('english_input').value = '';
+    }
+  </script>
+</body>
+
+</html>
