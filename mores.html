@@ -93,7 +93,7 @@
       font-size: 15px;
     }
 
-    .title{
+    .title {
       margin-bottom: 30px;
       font-size: 28px;
       font-family: 'Courier New', Courier, monospace;
@@ -113,26 +113,34 @@
 
 
     <p>text in Morse</p>
-    <textarea type="text" disabled placeholder="Morse going here" id="morse_input" rows="4"></textarea>
+    <textarea type="text" placeholder="Morse going here" id="morse_input" rows="4"></textarea>
     <button onclick="copyToClipboard('morse_input')">Copy Morse Code</button>
 
     <button onclick="reset()">RESET</button>
 
     <p id="logs"></p>
+    <p class="logs">
+      Instructions: avoid use things not in morse code like symobls
+      and when you translate from morse use space between letters and slash '/' between words
+    </p>
   </div>
 
   <script>
+
     const alpha_array = [
       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
       'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4',
-      '5', '6', '7', '8', '9', '0', ' '
+      '5', '6', '7', '8', '9', '0', ' ', '.', ',', '?', ';', ':', '-', '/', '\'',
+      '"', '!', '+', '(', ')', '$', '@'
     ];
 
     const morse_array = [
       '.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-',
       '.-..', '--', '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-',
       '.--', '-..-', '-.--', '--..', '.---', '..---', '...--', '....-', '.....',
-      '-....', '--...', '---..', '----.', '-----', ' '
+      '-....', '--...', '---..', '----.', '-----', '/', '.-.-.-', '-..--', '.--..',
+      '.-.-.', '-..--', '-....-', '-..-.', '.----.', '.-..-.', '-.-.--', '.-.-.',
+      '-.--.', '-.--.-', '...-..-', '.--.-.'
     ];
 
     function sleep(ms) {
@@ -159,7 +167,6 @@
         }
         console.log(alpha, morse);
         user_input_into_morse += morse;
-
       }
       console.log(user_input_into_morse);
       document.getElementById('morse_input').value = user_input_into_morse;
@@ -180,6 +187,38 @@
     function reset() {
       document.getElementById('morse_input').value = '';
       document.getElementById('english_input').value = '';
+    }
+
+    document.getElementById('morse_input').addEventListener('keyup', keyup_morse);
+
+    function keyup_morse(e) {
+      let user_input = e.target.value;
+      let morse_text = '';
+      let morse_input_array = [];
+      for (let i = 0; i < user_input.length; i++) {
+        let alpha = user_input[i];
+        if (alpha !== ' ') {
+          morse_text += alpha;
+          console.log(morse_text);
+        } else {
+          morse_input_array.push(morse_text);
+          morse_text = '';
+          console.log(morse_input_array);
+          console.log(morse_text);
+        }
+      }
+      let english_text = '';
+      for (let i = 0; i < morse_input_array.length; i++) {
+        english_alpha_index = morse_array.indexOf(morse_input_array[i])
+        if (english_alpha_index !== -1) {
+          if (alpha_array[english_alpha_index] !== '/')
+            english_text += alpha_array[english_alpha_index];
+        } else {
+          english_text += ' 🤷‍♂️ ';
+        }
+      }
+      console.log(english_text);
+      document.getElementById('english_input').value = english_text;
     }
   </script>
 </body>
