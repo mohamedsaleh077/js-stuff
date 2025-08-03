@@ -109,19 +109,21 @@
 
     <p>text in English</p>
     <textarea type="text" placeholder="English going here" id="english_input" rows="4"></textarea>
-    <button onclick="copyToClipboard('english_input')">Copy English text</button>
+    <button onclick="copyToClipboard('english_input');">Copy English text</button>
 
 
     <p>text in Morse</p>
     <textarea type="text" placeholder="Morse going here" id="morse_input" rows="4"></textarea>
-    <button onclick="copyToClipboard('morse_input')">Copy Morse Code</button>
+    <button onclick="copyToClipboard('morse_input');">Copy Morse Code</button>
 
-    <button onclick="reset()">RESET</button>
+    <button onclick="reset();">RESET</button>
+    <button onclick="play_morse();">Play</button>
 
     <p id="logs"></p>
     <p class="logs">
       Instructions: avoid use things not in morse code like symobls
       and when you translate from morse use space between letters and slash '/' between words
+      and you can play the morse code by pressing Play
     </p>
   </div>
 
@@ -165,10 +167,8 @@
         } else {
           morse = morse_array[alpha_index] + ' ';
         }
-        console.log(alpha, morse);
         user_input_into_morse += morse;
       }
-      console.log(user_input_into_morse);
       document.getElementById('morse_input').value = user_input_into_morse;
     }
 
@@ -180,7 +180,6 @@
       setTimeout(() => {
         console.log("Delayed for 3 second.");
         document.getElementById('logs').textContent = '';
-
       }, 1000);
     }
 
@@ -199,12 +198,9 @@
         let alpha = user_input[i];
         if (alpha !== ' ') {
           morse_text += alpha;
-          console.log(morse_text);
         } else {
           morse_input_array.push(morse_text);
           morse_text = '';
-          console.log(morse_input_array);
-          console.log(morse_text);
         }
       }
       let english_text = '';
@@ -217,8 +213,60 @@
           english_text += ' 🤷‍♂️ ';
         }
       }
-      console.log(english_text);
       document.getElementById('english_input').value = english_text;
+    }
+
+    let context = null;
+
+    const beep = (freq = 520, duration, vol = 100, startTime = context.currentTime) => {
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+      oscillator.frequency.value = freq;
+      oscillator.type = "square";
+      gain.gain.setValueAtTime(vol * 0.01, startTime);
+      gain.gain.setValueAtTime(0, startTime + duration);
+      oscillator.start(startTime);
+      oscillator.stop(startTime + duration);
+    }
+
+    context = new AudioContext();
+
+    function play_morse() {
+      let morse_code = document.getElementById('morse_input').value;
+      console.log(morse_code);
+
+      let timeOffset = 0; // in seconds
+
+      for (let i = 0; i < morse_code.length; i++) {
+        const char = morse_code[i];
+        let duration = 0;
+
+        if (char === '.') {
+          duration = 0.1;
+          timeOffset += 0.1; // space between letters
+
+        } else if (char === '-') {
+          duration = 0.3;
+          timeOffset += 0.1; // space between letters
+
+        } else if (char === ' ') {
+          timeOffset += 0.3; // space between letters
+          continue;
+        } else if (char === '/') {
+
+          timeOffset += 0.3; // space between letters
+          continue;
+
+        } else {
+          continue; // ignore unknown characters
+        }
+
+        beep(520, duration, 100, context.currentTime + timeOffset);
+
+        timeOffset += duration + 0.1; // add small gap between beeps
+      }
     }
   </script>
 </body>
