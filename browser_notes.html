@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>browser notebook</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: rgb(100, 100, 100);
+      color: white
+    }
+
+    textarea {
+      width: 100vw;
+      resize: vertical;
+      height: 80vh;
+      box-sizing: border-box;
+      border: 1px solid #fff;
+      background-color: rgb(130, 130, 130);
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>The text saver</h1>
+  <textarea name="txt" id="txt"></textarea>
+  <button onclick="save();">save</button>
+  <button onclick="reset();">clear</button>
+  <script>
+    document.getElementById("txt").innerHTML = localStorage.getItem("text");
+
+    function save() {
+      let user_input = document.getElementById("txt").value;
+      localStorage.setItem("text", user_input);
+    }
+
+    function reset() {
+      localStorage.setItem('text', '');
+      document.getElementById("txt").value = "";
+      location.reload();
+    }
+  </script>
+</body>
+
+</html>

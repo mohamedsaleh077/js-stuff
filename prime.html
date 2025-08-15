@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime number calcer</title>
+</head>
+
+<body>
+  <input type="text" id="user_input" onkeypress="HandleSubmit(event)">
+  <button onclick="calc()">Check if Prime numebr</button>
+  <button onclick="reset()">reset</button>
+  <p id="resulte"></p>
+
+  <script>
+    function isPrime(num) {
+      if(!parseInt(num)){
+        return 'NOT EVEN AN NUMBER!';
+      };
+
+      if (num === '1') {
+        return '1 IS NOT PRIME NUMBER';
+      }
+
+      if (!(num.toString().length < 4)) {
+        return 'LONGER THAN THREE NUMBERS';
+      }
+
+      let is_prime;
+      for (let i = num - 1; i >= 2; i--) {
+        if (num % i === 0) {
+          return 'The number is NOT Prime';
+        }
+      }
+
+      return 'This number is PRIME';
+    }
+
+    function calc() {
+      let user_input = document.getElementById('user_input').value;
+
+      if (user_input == '') {
+        document.getElementById('resulte').innerText = 'where is the number?';
+
+      } else {
+        document.getElementById('resulte').innerText = isPrime(user_input);
+
+      }
+    }
+
+    function HandleSubmit(event) {
+      if (event.key === 'Enter') {
+        calc();
+      }
+    }
+
+    function reset() {
+      document.getElementById('user_input').value = '';
+      document.getElementById('resulte').innerText = '';
+    }
+  </script>
+</body>
+
+</html>
