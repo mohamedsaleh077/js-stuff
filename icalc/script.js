@@ -7,7 +7,7 @@ userInputField.addEventListener('input', function (event) {
 });
 
 function AddInput(num) {
-  inputElement = document.getElementById('user_input')
+  let inputElement = document.getElementById('user_input')
   let textLength = inputElement.value.length;
 
   let lastValue = inputElement.value[inputElement.value.length - 1];
@@ -45,6 +45,7 @@ function isOp(num) {
 
 function reset() {
   document.getElementById('user_input').value = '';
+  document.getElementById('user_input').focus();
 }
 
 window.onload = reset();
