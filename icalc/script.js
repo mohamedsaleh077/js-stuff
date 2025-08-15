@@ -35,10 +35,12 @@ function AddInput(num) {
 }
 
 function isOp(num) {
-  if (num === '+' ||
+  if (
+    num === '+' ||
     num === '-' ||
-    num === '÷' ||
-    num === '×') {
+    num === '/' ||
+    num === '*'
+  ) {
     return true;
   }
 }
