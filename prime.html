@@ -14,11 +14,11 @@
   <p id="resulte"></p>
 
   <script>
+    const userInputField = document.getElementById('user_input');
+    userInputField.addEventListener('input', function (event) {
+      event.target.value = event.target.value.replace(/[^0-9]/g, '');
+    });
     function isPrime(num) {
-      if(!parseInt(num)){
-        return 'NOT EVEN AN NUMBER!';
-      };
-
       if (num === '1') {
         return '1 IS NOT PRIME NUMBER';
       }

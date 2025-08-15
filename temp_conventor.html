@@ -16,10 +16,15 @@
   <p id="f"></p>
   <p id="k"></p>
   <script>
+    const userInputField = document.getElementById('temp');
+    userInputField.addEventListener('input', function (event) {
+
+      event.target.value = event.target.value.replace(/[^0-9]/g, '');
+    });
     function calc() {
       let c_temp = parseFloat(document.getElementById("temp").value).toFixed(3);
-      let k_temp = ((c_temp*100)/100 + 27315/100 );
-      let f_temp = (((c_temp * 18)/10)+32).toFixed(3);
+      let k_temp = ((c_temp * 100) / 100 + 27315 / 100);
+      let f_temp = (((c_temp * 18) / 10) + 32).toFixed(3);
 
       msg = "temp in ";
       document.getElementById('c').innerText = msg + 'C: ' + c_temp;
