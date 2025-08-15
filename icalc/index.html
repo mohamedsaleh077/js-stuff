@@ -12,31 +12,33 @@
   <div class="container">
     <input type="text" name="user_input" id="user_input" autofocus>
 
-    <button class="numpad">1</button>
-    <button class="numpad">2</button>
-    <button class="numpad">3</button>
+    <button class="numpad" onclick="AddInput(1);">1</button>
+    <button class="numpad" onclick="AddInput(2);">2</button>
+    <button class="numpad" onclick="AddInput(3);">3</button>
 
-    <button class="ops">+</button>
+    <button class="ops" onclick="AddInput('+');">+</button>
 
 
-    <button class="numpad">4</button>
-    <button class="numpad">5</button>
-    <button class="numpad">6</button>
+    <button class="numpad" onclick="AddInput(4);">4</button>
+    <button class="numpad" onclick="AddInput(5);">5</button>
+    <button class="numpad" onclick="AddInput(6);">6</button>
 
-    <button class="ops">-</button>
+    <button class="ops" onclick="AddInput('-');">-</button>
 
-    <button class="numpad">7</button>
-    <button class="numpad">8</button>
-    <button class="numpad">9</button>
+    <button class="numpad" onclick="AddInput(7);">7</button>
+    <button class="numpad" onclick="AddInput(8);">8</button>
+    <button class="numpad" onclick="AddInput(9);">9</button>
 
-    <button class="ops">÷</button>
+    <button class="ops" onclick="AddInput('/');">/</button>
 
-    <button class="ops">✗</button>
+    <button class="ops" onclick="reset();">✗</button>
 
-    <button class="numpad">0</button>
+    <button class="numpad" onclick="AddInput(0);">0</button>
 
     <button class="ops">=</button>
-    <button class="ops">×</button>
+    <button class="ops" onclick="AddInput('*');">*</button>
+
+    <script src="script.js"></script>
 
   </div>
 </body>
