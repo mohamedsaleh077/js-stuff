@@ -4,6 +4,7 @@ const SinceHour = document.getElementById('hours');
 const DateInput = document.getElementById('date');
 const TimeInput = document.getElementById('time');
 const DateSubmit = document.getElementById('submit');
+const startButton = document.getElementById('start-button');
 const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
 function getDate() {
@@ -31,12 +32,12 @@ function getDate() {
     return userDateAsObject;
 }
 
-function saveDate(){
+function saveDate() {
     localStorage.setItem('date', JSON.stringify(getDate()));
     alert("Date Saved!");
 }
 
-function loadDate(){
+function loadDate() {
     return JSON.parse(localStorage.getItem('date'));
 }
 
@@ -61,12 +62,20 @@ function getCurrentTime() {
 }
 
 function displayData() {
-    let Days = calcDiff(loadDate());
-    let Date = loadDate();
-    let hours = getCurrentTime();
-    DaysCount.innerText = Days;
-    SinceDay.innerText = `Since ${Date.d}-${Date.m}-${Date.y}`;
-    SinceHour.innerText = `and ${hours.H} hours also ${hours.M} minute`;
+    if (loadDate() == null) {
+        DaysCount.innerText = '00';
+        SinceDay.innerText = `press Start to`;
+        SinceHour.innerText = `no data have been added`;
+    } else {
+        let Days = calcDiff(loadDate());
+        let Date = loadDate();
+        let hours = getCurrentTime();
+        startButton.innerText = 'Change Date'
+        DaysCount.innerText = Days;
+        SinceDay.innerText = `Since ${Date.d}-${Date.m}-${Date.y}`;
+        SinceHour.innerText = `and ${hours.H} hours also ${hours.M} minute`;
+    }
 }
 
-setInterval( () => {displayData()}, 1000);
+displayData() 
+setInterval(() => { displayData() }, 60000);
