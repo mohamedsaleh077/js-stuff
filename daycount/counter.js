@@ -5,6 +5,7 @@ const DateInput = document.getElementById('date');
 const TimeInput = document.getElementById('time');
 const DateSubmit = document.getElementById('submit');
 const startButton = document.getElementById('start-button');
+const TitleInput = document.getElementById('title');
 const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
 function getDate() {
@@ -34,6 +35,7 @@ function getDate() {
 
 function saveDate() {
     localStorage.setItem('date', JSON.stringify(getDate()));
+    displayData();
     alert("Date Saved!");
 }
 
@@ -49,7 +51,7 @@ function calcDiff(DateAsObj) { // calculate the number of days between two dates
     let diff = Math.abs(secondDate - firstDate);
     let diffDays = Math.round(diff / oneDay);
 
-    return diffDays - 1;
+    return diffDays;
 }
 
 function getCurrentTime() {
@@ -75,6 +77,16 @@ function displayData() {
         SinceDay.innerText = `Since ${Date.d}-${Date.m}-${Date.y}`;
         SinceHour.innerText = `and ${hours.H} hours also ${hours.M} minute`;
     }
+}
+
+function clear(){
+    localStorage.clear();
+    alert('Storage have been cleared');
+}
+
+function setTitle(){
+    localStorage.setItem('title', TitleInput.value);
+    alert(`the new title '${TitleInput.value}' is saved!`)
 }
 
 displayData() 

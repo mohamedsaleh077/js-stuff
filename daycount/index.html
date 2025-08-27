@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <p class="title">Day Counter</p>
+  <input id="title" class="title" type="text" value="Day Counter">
   <div class="container">
     <div class="Counter">
       <p id="days">DD</p>
@@ -17,6 +17,8 @@
       <p id="hours">Loading</p>
       <p id="since">Loading</p>
       <button id="start-button" onclick="openWindow();">START</button>
+      <button onclick="clear();">Clear</button>
+      <button onclick="saveTitle();">Save the new title</button>
     </div>
     <!-- <div class="tier">
       <img src="crown.webp" alt="placeholder">
