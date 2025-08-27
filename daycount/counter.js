@@ -80,7 +80,7 @@ function displayData() {
     }
 }
 
-function clear(){
+function clearStorage(){
     localStorage.clear();
     alert('Storage have been cleared');
 }
