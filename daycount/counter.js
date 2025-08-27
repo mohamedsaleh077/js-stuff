@@ -1,5 +1,6 @@
 const DaysCount = document.getElementById('days');
 const SinceDay = document.getElementById('since');
+const SinceHour = document.getElementById('hours');
 const DateInput = document.getElementById('date');
 const TimeInput = document.getElementById('time');
 const DateSubmit = document.getElementById('submit');
@@ -62,8 +63,10 @@ function getCurrentTime() {
 function displayData() {
     let Days = calcDiff(loadDate());
     let Date = loadDate();
+    let hours = getCurrentTime();
     DaysCount.innerText = Days;
     SinceDay.innerText = `Since ${Date.d}-${Date.m}-${Date.y}`;
+    SinceHour.innerText = `and ${hours.H} hours also ${hours.M} minute`;
 }
 
 setInterval( () => {displayData()}, 1000);
