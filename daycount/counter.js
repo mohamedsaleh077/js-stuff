@@ -59,7 +59,8 @@ function getCurrentTime() {
 
     return {
         H: CurrentTime.getHours(),
-        M: CurrentTime.getMinutes()
+        M: CurrentTime.getMinutes(),
+        S: CurrentTime.getSeconds()
     }
 }
 
@@ -75,7 +76,7 @@ function displayData() {
         startButton.innerText = 'Change Date'
         DaysCount.innerText = Days;
         SinceDay.innerText = `Since ${Date.d}-${Date.m}-${Date.y}`;
-        SinceHour.innerText = `and ${hours.H} hours also ${hours.M} minute`;
+        SinceHour.innerText = `and ${hours.H} hours, ${hours.M} minute and ${hours.S} Secound`;
     }
 }
 
@@ -90,4 +91,4 @@ function setTitle(){
 }
 
 displayData() 
-setInterval(() => { displayData() }, 60000);
+setInterval(() => { displayData() }, 1000);
