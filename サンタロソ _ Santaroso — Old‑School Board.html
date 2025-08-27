@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>サンタロソ | Santaroso — Old‑School Board</title>
+  <meta name="description" content="Santaroso is a safe, Arab‑friendly image board made with love in Egypt. No NSFW, no bots — just chill, honest, retro‑style community fun.">
+  <meta name="keywords" content="Santaroso, imageboard, Arab community, memes, anime, technology, Egypt forum, retro board, 4chan alternative, no NSFW, myspace">
+  <meta name="author" content="MinecraftPlayer44">
+  <meta name="theme-color" content="#9ad07f">
+  <link rel="icon" type="image/png" href="%E3%82%B5%E3%83%B3%E3%82%BF%E3%83%AD%E3%82%BD%20_%20Santaroso%20%E2%80%94%20Old%E2%80%91School%20Board_files/logo.png">
+  <style>
+    /* ------------------------------
+       Santaroso Old‑School Theme
+       MySpace × 4chan × classic forums
+       ------------------------------ */
+
+    /* Reset-ish */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; font: 14px/1.5 Verdana, Tahoma, Arial, sans-serif; }
+    img { max-width: 100%; height: auto; }
+    a { text-decoration: none; }
+
+    /* Themes (inspired by Futaba/YotsubaB/MySpace/Win98) */
+    :root {
+      --bg: #fff4e0;        /* base bg */
+      --paper: #fffdf8;     /* card bg */
+      --ink: #222;          /* text */
+      --muted: #555;        /* secondary text */
+      --link: #a03c3c;      /* links */
+      --accent: #a03c3c;    /* buttons */
+      --border: #c9b49a;    /* borders */
+      --soft: #ffe9c9;      /* headers */
+      --badge: #ffd57c;     /* badges */
+      --shadow: rgba(0,0,0,.08);
+    }
+
+    body.theme-futaba {
+      --bg: #f0ffe6;
+      --paper: #ffffef;
+      --ink: #222;
+      --link: #117743;
+      --accent: #117743;
+      --border: #c6d8b6;
+      --soft: #e4ffd1;
+      --badge: #c1ff9b;
+    }
+
+    body.theme-yotsuba-b {
+      --bg: #eef2ff;
+      --paper: #ffffff;
+      --ink: #1b2330;
+      --link: #0059d6;
+      --accent: #0059d6;
+      --border: #cbd5ff;
+      --soft: #e6eaff;
+      --badge: #bfd0ff;
+    }
+
+    body.theme-myspace {
+      --bg: #0b0b1a;
+      --paper: #131328;
+      --ink: #f3f3ff;
+      --link: #a6b7ff;
+      --accent: #9b59ff;
+      --border: #2b2b5a;
+      --soft: #1a1a38;
+      --badge: #ff85e8;
+      --shadow: rgba(0,0,0,.45);
+    }
+
+    body.theme-win98 {
+      --bg: #bfbfbf;
+      --paper: #dfdfdf;
+      --ink: #000;
+      --link: #0000ee;
+      --accent: #008080;
+      --border: #888;
+      --soft: #cfcfcf;
+      --badge: #f5f58f;
+    }
+
+    /* Retro wallpaper (pure CSS tiles) */
+    body {
+      background:
+        radial-gradient(circle at 8px 8px, rgba(255,255,255,.35) 2px, transparent 2px) 0 0/16px 16px,
+        linear-gradient(0deg, var(--bg), var(--bg));
+      color: var(--ink);
+    }
+
+    /* Layout */
+    .topbar {
+      position: sticky; top: 0; z-index: 5;
+      background: var(--paper);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 0 var(--soft);
+    }
+    .topbar-inner { display: flex; align-items: center; gap: 12px; padding: 8px 12px; }
+    .logo { display:flex; align-items:center; gap:10px; }
+    .logo .wordmark { font-weight: 700; letter-spacing:.5px; }
+    .logo small { color: var(--muted); display:block; font-size: 11px; }
+
+    .board-strip {
+      white-space: nowrap; overflow-x: auto; scrollbar-width: thin;
+      border-top: 1px dashed var(--border);
+      border-bottom: 1px dashed var(--border);
+      background: var(--soft);
+      font: 12px Verdana, Tahoma, Arial, sans-serif;
+    }
+    .board-strip a { display:inline-block; padding: 6px 10px; color: var(--link); }
+    .board-strip a:hover { text-decoration: underline; }
+
+    .marquee { background: var(--paper); border-bottom: 1px solid var(--border); }
+    .marquee-inner { padding: 6px 10px; font-size: 12px; color: var(--muted); }
+    .marquee-inner marquee { font-weight: 600; }
+
+    .layout { display: grid; grid-template-columns: 260px 1fr; gap: 16px; padding: 16px; max-width: 1200px; margin: 0 auto; }
+    @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+
+    /* Panels */
+    .panel { background: var(--paper); border: 1px solid var(--border); box-shadow: 0 2px 0 var(--shadow); border-radius: 8px; overflow: hidden; }
+    .panel h2 { margin: 0; padding: 10px 12px; background: var(--soft); border-bottom: 1px solid var(--border); font-size: 16px; }
+    .panel .pad { padding: 12px; }
+
+    /* Sidebar bits (MySpace vibes) */
+    .profile { text-align: center; }
+    .avatar { width: 96px; height: 96px; border-radius: 12px; border: 2px solid var(--border); object-fit: cover; background: #ddd; margin: 6px auto; display:block; }
+    .online-dot { width: 8px; height: 8px; background: #13c713; border-radius: 50%; display:inline-block; vertical-align: middle; box-shadow: 0 0 6px rgba(19,199,19,.8); }
+    .badge { display:inline-block; padding: 2px 6px; background: var(--badge); border: 1px solid var(--border); border-radius: 6px; font-size: 11px; margin: 2px; }
+    .counter { font-family: "Lucida Console", Monaco, monospace; font-size: 12px; background: #000; color: #0f0; padding: 3px 6px; border-radius: 4px; display: inline-block; }
+
+    .webring a { display:inline-block; padding: 4px 6px; margin: 3px; border: 1px dashed var(--border); border-radius: 6px; font-size: 12px; color: var(--link); }
+
+    .controls { display:flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .select, .btn, .input { font: inherit; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--paper); color: var(--ink); }
+    .btn { background: linear-gradient(to bottom, var(--accent), color-mix(in oklab, var(--accent) 70%, #000 30%)); color: #fff; border: 1px solid color-mix(in oklab, var(--accent) 60%, #000 40%); cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 2px 0 var(--shadow); }
+    .btn:hover { filter: brightness(1.05); }
+
+    /* CTA — Android app */
+    .cta { display:block; text-align:center; padding: 10px 12px; margin: 12px 0; border-radius: 8px; border: 2px dashed var(--border); background: repeating-linear-gradient(45deg, #fff, #fff 8px, var(--soft) 8px, var(--soft) 16px); }
+    .cta a { display:inline-block; padding: 10px 16px; background: #ff1a1a; color: #fff; border-radius: 8px; border: 2px solid #b30000; font-weight: 700; text-shadow: 0 1px 0 rgba(0,0,0,.25); animation: blink 1.2s steps(2, jump-none) infinite; }
+    @keyframes blink { 50% { opacity: .45; } }
+
+    /* Boards table (classic forum style) */
+    table { width: 100%; border-collapse: collapse; }
+    .board-table th, .board-table td { border: 1px solid var(--border); padding: 10px; text-align: left; }
+    .board-table th { background: var(--soft); font-size: 13px; }
+    .board-table td:nth-child(1) { width: 160px; font-weight: 700; }
+    .board-table a { color: var(--link); text-decoration: underline; }
+
+    /* Threads preview (imageboard flavor) */
+    .threads { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .post { border: 1px solid var(--border); background: var(--paper); border-radius: 8px; padding: 10px; box-shadow: 0 2px 0 var(--shadow); }
+    .post .meta { font: 12px/1.2 Verdana, Tahoma, Arial, sans-serif; color: var(--muted); margin-bottom: 6px; }
+    .post .subject { font-weight: 700; margin-bottom: 6px; }
+    .post .comment { white-space: pre-wrap; }
+    .post .thumb { width: 100%; max-height: 140px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 6px; }
+    .spoiler { background: #000; color: #000; border-radius: 3px; padding: 0 4px; cursor: pointer; }
+    .spoiler.revealed { color: #fff; }
+
+    /* Post form (4chan-esque) */
+    .post-form { display:grid; grid-template-columns: 120px 1fr; gap: 8px 10px; align-items: center; }
+    .post-form label { font-weight: 700; font-size: 12px; }
+    .post-form .input, .post-form textarea { width: 100%; }
+    .post-form textarea { min-height: 120px; resize: vertical; }
+
+    /* Rules box (retro alert) */
+    .rules { background: linear-gradient(180deg, var(--soft), var(--paper)); border: 2px ridge var(--border); border-radius: 10px; }
+    .rules ul { margin: 0; padding-left: 18px; }
+    .rules li { margin: 6px 0; }
+
+    /* Footer */
+    footer { text-align: center; margin: 24px 0 40px; color: var(--muted); font-size: 12px; }
+
+    /* RTL helper for Arabic */
+    [dir="rtl"] .post-form { grid-template-columns: 1fr 120px; }
+  </style>
+</head>
+<body class="theme-futaba">
+  <noscript><div style="padding:8px 12px;background:#ffefc4;border-bottom:1px solid #e6c46a;text-align:center">This site looks extra cute with JavaScript on 🌟</div></noscript>
+
+  <!-- Top Bar -->
+  <div class="topbar" role="banner">
+    <div class="topbar-inner">
+      <div class="logo" aria-label="Santaroso">
+        <img src="%E3%82%B5%E3%83%B3%E3%82%BF%E3%83%AD%E3%82%BD%20_%20Santaroso%20%E2%80%94%20Old%E2%80%91School%20Board_files/logo.png" alt="Santaroso" width="28" height="28" onerror="this.replaceWith(document.createTextNode('📼'))">
+        <div class="wordmark">サンタロソ | <strong>Santaroso</strong>
+          <small>Made with ❤️ in Egypt — safe, old‑school fun</small>
+        </div>
+      </div>
+      <div class="controls" style="margin-left:auto">
+        <label for="theme" class="visually-hidden">Theme</label>
+        <select id="theme" class="select" aria-label="Switch theme">
+          <option value="futaba" selected="selected">Futaba (green)</option>
+          <option value="yotsuba-b">Yotsuba B (blue)</option>
+          <option value="myspace">MySpace (glam)</option>
+          <option value="win98">Win98 (gray)</option>
+        </select>
+        <button id="rtl" class="btn" title="Toggle Arabic / RTL">RTL</button>
+      </div>
+    </div>
+    <div class="board-strip" aria-label="Boards">
+      <a href="https://old-santaroso.ct.ws/general/index.php">/gen/</a>
+      <a href="https://old-santaroso.ct.ws/tech/index.php">/tech/</a>
+      <a href="https://old-santaroso.ct.ws/memes/index.php">/meme/</a>
+      <a href="https://old-santaroso.ct.ws/anime/index.php">/a/</a>
+      <a href="https://old-santaroso.ct.ws/miku/index.php">/miku/</a>
+      <a href="https://old-santaroso.ct.ws/phymth/index.php">/sci/</a>
+      <a href="#post" title="Create a post">[Start Thread]</a>
+      <a href="#rules">[Rules]</a>
+      <a href="#news">[News]</a>
+      <a href="#webring">[Webring]</a>
+    </div>
+    <div class="marquee">
+      <div class="marquee-inner">
+        <marquee behavior="scroll" direction="left" scrollamount="4">No politics • No NSFW • No spam • Be excellent to each other • كلنا هنا عشان نفرفش ونتعلم 🤍</marquee>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page -->
+  <div class="layout">
+    <!-- Sidebar / MySpace‑y profile -->
+    <aside>
+      <section class="panel profile">
+        <h2>Community</h2>
+        <div class="pad">
+          <img class="avatar" src="%E3%82%B5%E3%83%B3%E3%82%BF%E3%83%AD%E3%82%BD%20_%20Santaroso%20%E2%80%94%20Old%E2%80%91School%20Board_files/logo.png" alt="Santaroso avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'96\' height=\'96\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23ddd\'/%3E%3Ctext x=\'50%25\' y=\'54%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'monospace\' font-size=\'12\'%3ESR%3C/text%3E%3C/svg%3E'">
+          <div><span class="online-dot" aria-hidden="true"></span> <span>online now</span></div>
+          <div style="margin-top:6px">
+            <span class="badge">Arab‑friendly</span>
+            <span class="badge">No NSFW</span>
+            <span class="badge">Retro vibes</span>
+          </div>
+          <div style="margin-top:8px">Visitor #: <span id="counter" class="counter">000002</span></div>
+        </div>
+      </section>
+
+      <section id="webring" class="panel webring">
+        <h2>Webring</h2>
+        <div class="pad">
+          <a href="#">Pixel Café</a>
+          <a href="#">Arab Devs</a>
+          <a href="#">Retro Net</a>
+          <a href="#">Miku Shrine</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Quick Actions</h2>
+        <div class="pad">
+          <div class="controls">
+            <a class="btn" href="#post">Start Thread</a>
+            <a class="btn" href="#rules">Read Rules</a>
+          </div>
+          <div class="cta" style="margin-top:10px">
+            <a href="https://www.appcreator24.com/app3711033-p4ksxg">DOWNLOAD OUR ANDROID APP</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Moderation</h2>
+        <div class="pad" style="font-size:12px;color:var(--muted)">
+          Your IP is stored with an anonymous ID for moderation only. Rule‑breaking ⇒ instant ban.
+        </div>
+      </section>
+    </aside>
+
+    <!-- Main content -->
+    <main>
+      <header class="panel">
+        <h2>Welcome to Santaroso Image Board</h2>
+        <div class="pad">
+          <p>Santaroso is a clean, retro‑style imageboard made for the 
+Arab world (and beyond). No politics. No NSFW. No spam. Just a 
+respectful space to talk, share memes, laugh, and learn. Whether you’re 
+tech‑savvy, anime‑obsessed, or just want to chill — this is for you.</p>
+        </div>
+      </header>
+
+      <section class="panel" id="news">
+        <h2>📢 Community News <small style="font-weight:400;color:var(--muted)">(April 25, 2025)</small></h2>
+        <div class="pad">
+          <p>Thanks for joining! We’re looking for cool people to help with:</p>
+          <ul>
+            <li>Security (anti‑spam / abuse)</li>
+            <li>PHP / Frontend devs</li>
+            <li>UI / UX Designers</li>
+            <li>Moderators &amp; Helpers</li>
+            <li>Sponsors &amp; Donators</li>
+          </ul>
+          <p>DM: <a href="https://t.me/MinecraftPlayer44" target="_blank" rel="noopener">@MinecraftPlayer44</a></p>
+        </div>
+      </section>
+
+      <section class="panel" id="boards">
+        <h2>🧭 Available Boards</h2>
+        <div class="pad">
+          <table class="board-table" role="table">
+            <thead>
+              <tr><th scope="col">Board</th><th scope="col">Description</th><th scope="col">Link</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>/General</td><td>Anything goes — casual talk, stories, thoughts.</td><td><a href="https://old-santaroso.ct.ws/general/index.php">Visit</a></td></tr>
+              <tr><td>/Miku</td><td>Dedicated to Miku (for Abdelrahman Rashed‑sama 💙)</td><td><a href="https://old-santaroso.ct.ws/miku/index.php">Visit</a></td></tr>              <tr><td>/Photography</td><td>photography</td><td><a href="https://old-santaroso.ct.ws/p/index.php">Visit</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" id="threads">
+        <h2>🔥 Fresh Threads</h2>
+        <div class="pad">
+          <div class="threads">
+            <article class="post">
+              <div class="meta">Anonymous 07/21/25(Fri) 22:41:13 No.1024 · /tech/</div>
+              <div class="subject">Best budget phone in Egypt right now?</div>
+              <img class="thumb" src="%E3%82%B5%E3%83%B3%E3%82%BF%E3%83%AD%E3%82%BD%20_%20Santaroso%20%E2%80%94%20Old%E2%80%91School%20Board_files/5-500x300.jpg" alt="phone">
+              <div class="comment">Looking for something under 7k EGP. Battery life &gt; camera. Any suggestions? 🇪🇬</div>
+            </article>
+            <article class="post">
+              <div class="meta">Anon !tripCODE 08/01/25(Sat) 11:02:05 No.392 · /a/</div>
+              <div class="subject">Summer anime recs?</div>
+              <img class="thumb" src="%E3%82%B5%E3%83%B3%E3%82%BF%E3%83%AD%E3%82%BD%20_%20Santaroso%20%E2%80%94%20Old%E2%80%91School%20Board_files/183-500x300.jpg" alt="anime">
+              <div class="comment">Drop your <span class="spoiler" title="Click to reveal">spoilers</span> gently pls.</div>
+            </article>
+            <article class="post">
+              <div class="meta">Santaroso Mod ◆9b59ff 08/18/25(Tue) 19:22:48 No.777 · /meme/</div>
+              <div class="subject">Post your favorite cursed images</div>
+              <img class="thumb" src="%E3%82%B5%E3%83%B3%E3%82%BF%E3%83%AD%E3%82%BD%20_%20Santaroso%20%E2%80%94%20Old%E2%80%91School%20Board_files/36-500x300.jpg" alt="meme">
+              <div class="comment">Keep it SFW. Weird is fine; gross isn’t.</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel rules" id="rules">
+        <h2>🚨 Site Rules — Follow These</h2>
+        <div class="pad">
+          <ul>
+            <li>No spam, flooding, or “hi” and ghosting.</li>
+            <li>No porn, NSFW, hentai, or adult content at all.</li>
+            <li>No bullying, hate, or offensive talk.</li>
+            <li>No political discussions or propaganda — keep it chill.</li>
+            <li>No illegal content, phishing, ads, or shady links.</li>
+            <li>Everything you post is permanent — no delete or edit. Think first!</li>
+            <li>Your IP is saved and linked to an anonymous user ID (for moderation only).</li>
+            <li>Rule‑breaking = instant ban. No warnings.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel" id="changelog">
+        <h2>🛠️ Changelog</h2>
+        <div class="pad">
+          <h3>August 22, 2025</h3>
+          <ul><li>Colors for users</li><li>Upload media in comments</li></ul>
+          <h3>April 24, 2025</h3>
+          <ul><li>Hidden easter egg 👀</li><li>Custom themes supported (DM Discord: <code>sudowtf</code>)</li><li>More UI love and polish</li></ul>
+          <h3>April 23, 2025</h3>
+          <ul>
+            <li>We’re back online!</li>
+            <li>Added report system</li>
+            <li>New Physics &amp; Math board</li>
+            <li>No more auto‑refresh + sounds</li>
+            <li>Fast comments without reload</li>
+            <li>Upload limits: 2MB (images), 5MB (videos)</li>
+            <li>Post: 500 chars | Comment: 300 chars</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel" id="todo">
+        <h2>📓 To‑Do</h2>
+        <div class="pad">
+          <ul>
+            <li>Finish my exams 😅</li>
+            <li>Stop using DeepSeek AI lol</li>
+            <li>Add user‑submitted styles/themes</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel" id="post">
+        <h2>Create a Thread</h2>
+        <div class="pad">
+          <form class="post-form" onsubmit="event.preventDefault(); alert('Pretend this posted! Hook to your PHP endpoint.');">
+            <label for="board">Board</label>
+            <select id="board" class="select"><option selected="selected">/General</option><option>/Technology</option><option>/Memes</option><option>/Anime</option><option>/Miku</option><option>/Physics &amp; Math</option></select>
+
+            <label for="name">Name</label>
+            <input id="name" class="input" type="text" placeholder="Anonymous">
+
+            <label for="subject">Subject</label>
+            <input id="subject" class="input" type="text" placeholder="Subject (optional)">
+
+            <label for="file">File</label>
+            <input id="file" class="input" type="file" accept="image/*,video/*">
+
+            <label for="comment">Comment</label>
+            <textarea id="comment" class="input" placeholder="Type your post…"></textarea>
+
+            <div></div>
+            <div class="controls">
+              <button class="btn" type="submit">Post</button>
+              <button class="btn" type="reset">Clear</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        © 2025 Santaroso by MinecraftPlayer44 · Made with ❤️ and memes · <a href="#">Top</a>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Theme persistence
+    const themeSelect = document.getElementById('theme');
+    const savedTheme = localStorage.getItem('santaroso.theme') || 'futaba';
+    document.body.className = `theme-${savedTheme}`;
+    themeSelect.value = savedTheme;
+    themeSelect.addEventListener('change', (e) => {
+      document.body.className = `theme-${e.target.value}`;
+      localStorage.setItem('santaroso.theme', e.target.value);
+      // Update theme-color meta for nicer mobile UI
+      const meta = document.querySelector('meta[name="theme-color"]');
+      const colorMap = { 'futaba': '#9ad07f', 'yotsuba-b': '#6b8cff', 'myspace': '#9b59ff', 'win98': '#008080' };
+      meta.setAttribute('content', colorMap[e.target.value] || '#9ad07f');
+    });
+
+    // RTL toggle (Arabic-friendly)
+    const rtlBtn = document.getElementById('rtl');
+    rtlBtn.addEventListener('click', () => {
+      const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+      document.documentElement.setAttribute('dir', isRTL ? 'ltr' : 'rtl');
+      rtlBtn.textContent = isRTL ? 'RTL' : 'LTR';
+      localStorage.setItem('santaroso.dir', isRTL ? 'ltr' : 'rtl');
+    });
+    (function initDir(){ const d = localStorage.getItem('santaroso.dir'); if(d){ document.documentElement.setAttribute('dir', d); rtlBtn.textContent = d==='rtl'?'LTR':'RTL'; }})();
+
+    // Spoiler toggles
+    document.addEventListener('click', (e) => {
+      if(e.target.classList.contains('spoiler')){
+        e.target.classList.toggle('revealed');
+      }
+    });
+
+    // Visitor counter (local only)
+    const n = (parseInt(localStorage.getItem('santaroso.counter')||'0',10) + 1);
+    localStorage.setItem('santaroso.counter', n);
+    const pad = String(n).padStart(6,'0');
+    const el = document.getElementById('counter');
+    if(el) el.textContent = pad;
+  </script>
+
+
+</body></html>

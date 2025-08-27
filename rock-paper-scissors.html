@@ -65,15 +65,17 @@
 <body>
   <div>
     <p>Rock Paper Scissors Game VS PC</p>
-    <button onclick="user_play(0);">✊</button>
-    <button onclick="user_play(1);">✋</button>
-    <button onclick="user_play(2);">✌️</button>
+    <button onclick="user_play(0);">✊ R</button>
+    <button onclick="user_play(1);">✋ P</button>
+    <button onclick="user_play(2);">✌️ S</button>
+    <br>
+    <button class="normal-button" onclick="AutoPlay();" id="autoplay">(A)uto Play</button>
+    <button class="normal-button" onclick="reset()">(R)ESET</button>
     <div class="resulte">
       <p>Resulte</p>
       <p>User <span id="user_resulte"></span> <span id="pc_resulte"></span> PC</p>
       <p id="winner"></p>
-      <p style="display: inline-block;">you win for <span id="wins"></span> times ans lose for <span id="loses"></span> times</p>
-      <button class="normal-button" onclick="reset()">RESET</button>
+      <p style="display: inline-block;">win <span id="wins"></span> lose <span id="loses"></span></p>
     </div>
   </div>
 
@@ -85,7 +87,7 @@
     var win_count = 0;
     var lose_count = 0;
 
-    function reset(){
+    function reset() {
       win_count = 0;
       lose_count = 0;
       display_counter_result();
@@ -95,7 +97,7 @@
       document.getElementById('user_resulte').innerHTML = TurnNumberIntoIcon(user);
       document.getElementById('pc_resulte').innerHTML = TurnNumberIntoIcon(pc);
     }
-    function display_counter_result(){
+    function display_counter_result() {
       document.getElementById('wins').innerHTML = win_count;
       document.getElementById('loses').innerHTML = lose_count;
     }
@@ -163,6 +165,39 @@
       display_counter_result();
       document.getElementsByClassName('resulte')[0].style.height = '300px';
     }
+
+    let isAutoPlaying = false;
+    let IntervalId;
+    let autoPlayingButton = document.getElementById('autoplay');
+    function AutoPlay() {
+      if (!isAutoPlaying) {
+        IntervalId = setInterval(() => { user_play(pc_play()) }, 1000);
+        isAutoPlaying = true;
+        autoPlayingButton.innerText = "Stop"
+      } else {
+        clearInterval(IntervalId);
+        isAutoPlaying = false;
+        autoPlayingButton.innerText = "Auto Play"
+      }
+    }
+
+    document.body.addEventListener('keydown', (event) => {
+      if (event.key === 'r') {
+        user_play(2);
+      }
+      if (event.key === 'p') {
+        user_play(1);
+      }
+      if (event.key === 's') {
+        user_play(0);
+      }
+      if (event.key === 'a') {
+        AutoPlay();
+      }
+      if (event.key === 'd') {
+        reset();
+      }
+    })
   </script>
 
 </body>

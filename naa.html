@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const lmao = () => {
+            console.log("lmao");
+        };
+        lmao();
+
+        [
+            'hi',
+            'halo',
+            'amiricaia',
+            'oh mai gah'
+        ].forEach((value, index) =>  {
+            console.log(index, value);
+        });
+
+        let arrowFunction = param1 => {
+            console.log(param1);
+        };
+
+        arrowFunction('hi');
+
+        const oneLineLmao = (param1, param2 = 3) => param1 + param2;
+        console.log(oneLineLmao(4, 5))
+
+        console.log(
+            [3, 6, -8, 5, -9, 0, 3].filter((value, index) => {
+                if (value >= 0){
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+        );
+
+        console.log(
+            [1, 2, 3 ,4].map( value => value * 10)
+        );
+
+        setTimeout( () => {console.log("timeout");}, 3000);
+
+        /* learn how to use the variable in other file */
+        // type = module
+        // export const varb = 'sws';
+        // import {varb as MyVar} from 'filepathlol'
+    </script>
+</body>
+</html>
