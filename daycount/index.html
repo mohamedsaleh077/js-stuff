@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day Counter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <p class="title">Day Counter</p>
+  <div class="container">
+    <div class="Counter">
+      <p id="days">DD</p>
+      <span>Days</span>
+      <p id="since">Loading</p>
+      <button onclick="openWindow();">START</button>
+    </div>
+    <!-- <div class="tier">
+      <img src="crown.webp" alt="placeholder">
+      <p id="tier">Crown</p>
+    </div> -->
+  </div>
+
+  <div id="add-date-window">
+    <button class="x" onclick="closeWindow();">X</button>
+    <p>select date to start from</p>
+    <input type="date" id="date">
+    <button id="submit" onclick="saveDate(); closeWindow();">Save</button>
+  </div>
+
+  <script src="./window.js"></script>
+  <script src="./counter.js"></script>
+</body>
+
+</html>
