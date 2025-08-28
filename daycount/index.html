@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <input id="titlQe" class="title" type="text" value="click me to set a title">
+  <input id="title" class="title" type="text" value="click me to set a title">
   <div class="container">
     <div class="Counter">
       <p id="days">DD</p>
@@ -17,9 +17,13 @@
       <p id="hours">Loading</p>
       <p id="since">Loading</p>
       <button id="start-button" onclick="openWindow();">START</button>
+      <!-- <button id="start-button" onclick="saveLog();" style="display: none;">RELAPSE</button> -->
       <button onclick="clearStorage();">Clear</button>
-      <button onclick="saveTitle();">Save the new title</button>
+      <button onclick="setTitle();">Save the new title</button>
       <a href="https://www.appcreator24.com/app3719133-rxjgq2"><button>Download App</button></a>
+
+      <p style="text-align: left; margin: 10px;" id="logs-view">logs: <span id="logs"></span></p>
+
     </div>
     <!-- <div class="tier">
       <img src="crown.webp" alt="placeholder">
