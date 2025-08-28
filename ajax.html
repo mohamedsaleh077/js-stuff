@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // XHR
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://santaroso.free.nf/api/users/');
+        xhr.onload = () => console.log('XHR:', xhr.responseText);
+        xhr.onerror = () => console.error('XHR network error');
+        xhr.send();
+
+        // fetch
+        fetch('https://santaroso.free.nf/api/users/', { mode: 'cors' })
+            .then(r => r.json())
+            .then(data => console.log('fetch:', data))
+            .catch(err => console.error('fetch error:', err));
+    </script>
+</body>
+
+</html>
